@@ -11,6 +11,9 @@ class RandomNumberController {
 
     @GetMapping("/random")
     suspend fun getRandomNumber(@RequestParam(defaultValue = "50") delay: Long): Any {
+        if (delay < 0) {
+            throw IllegalArgumentException("Delay can not be negative")
+        }
         delay(delay)
         return mapOf("number" to generateNumber())
     }
