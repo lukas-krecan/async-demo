@@ -1,11 +1,9 @@
 package net.javacrumbs.reactorbased
 
-import net.javacrumbs.reactorbased.Utils.createClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
-import retrofit2.http.GET
 
 
 @RestController

@@ -22,9 +22,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("com.squareup.retrofit2:retrofit:2.9.0")
-	implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
+
 	testImplementation("io.projectreactor:reactor-test")
 }
 

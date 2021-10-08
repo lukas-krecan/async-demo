@@ -1,22 +1,23 @@
 package net.javacrumbs.reactorbased
 
+import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import retrofit2.http.GET
+import org.springframework.web.reactive.function.client.WebClient
+
 
 
 @RestController
 class CoroutineController {
-    private var client = Utils.createClient(Client::class.java)
+    private val webClient: WebClient = WebClient.builder().baseUrl("http://localhost:8080").build()
 
     @GetMapping("/demoCoroutines")
     suspend fun demo(): Result {
-        val randomNumber = client.getRandomNumber().number
-        return Result(randomNumber)
+        val randomNumber = getRandomNumber()
+        return Result(randomNumber.number)
     }
 
-    private interface Client {
-        @GET("/random")
-        suspend fun getRandomNumber(): RandomNumber
+    private suspend fun getRandomNumber(): RandomNumber {
+        return webClient.get().uri("/random").retrieve().bodyToMono(RandomNumber::class.java).awaitSingle()
     }
 }
