@@ -1,2 +1,8 @@
+### GET from Reactor
 GET http://localhost:8081/demoReactor?delay=100&log=true
+Request-Id: 123456
+
+
+### GET from Coroutines
+GET http://localhost:8081/demoCoroutines?delay=100&log=true
 Request-Id: 123456
