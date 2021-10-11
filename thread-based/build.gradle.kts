@@ -22,6 +22,7 @@ dependencies {
 	implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("io.github.microutils:kotlin-logging:2.0.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
