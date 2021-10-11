@@ -1,5 +1,6 @@
 package net.javacrumbs.reactorbased
 
+import mu.KLogging
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -13,8 +14,13 @@ class ReactorController {
 
 
     @GetMapping("/demoReactor")
-    fun demo(@RequestParam(defaultValue = "50") delay: Long): Mono<Result> {
+    fun demo(
+        @RequestParam(defaultValue = "50") delay: Long,
+        @RequestParam(defaultValue = "false") log: Boolean
+    ): Mono<Result> {
+        if (log) logger.info { "Will generate random number" }
         return getRandomNumber(delay).map {
+            if (log) logger.info { "Random number generated" }
             Result(it.number * 2)
         }
     }
@@ -23,4 +29,5 @@ class ReactorController {
         return webClient.get().uri("/random?delay={delay}", delay).retrieve().bodyToMono(RandomNumber::class.java)
     }
 
+    companion object: KLogging()
 }
