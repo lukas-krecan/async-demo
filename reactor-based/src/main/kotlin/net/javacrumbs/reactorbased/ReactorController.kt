@@ -15,7 +15,7 @@ class ReactorController {
 
     @GetMapping("/demoReactor")
     fun demo(
-        @RequestParam(defaultValue = "50") delay: Long,
+        @RequestParam(defaultValue = "100") delay: Long,
         @RequestParam(defaultValue = "false") log: Boolean
     ): Mono<Result> {
         if (log) logger.info { "Will generate random number" }

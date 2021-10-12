@@ -14,7 +14,7 @@ class CoroutineController {
 
     @GetMapping("/demoCoroutines")
     suspend fun demo(
-        @RequestParam(defaultValue = "50") delay: Long,
+        @RequestParam(defaultValue = "100") delay: Long,
         @RequestParam(defaultValue = "false") log: Boolean
     ): Result {
         if (log) logger.info { "Will generate random number" }

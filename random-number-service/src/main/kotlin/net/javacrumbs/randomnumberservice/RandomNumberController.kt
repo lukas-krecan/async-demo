@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom
 class RandomNumberController {
 
     @GetMapping("/random")
-    suspend fun getRandomNumber(@RequestParam(defaultValue = "50") delay: Long): Any {
+    suspend fun getRandomNumber(@RequestParam(defaultValue = "100") delay: Long): Any {
         if (delay < 0) {
             throw IllegalArgumentException("Delay can not be negative")
         }
