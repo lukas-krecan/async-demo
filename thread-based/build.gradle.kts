@@ -16,7 +16,10 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-web") {
+		exclude("org.springframework.boot", "spring-boot-starter-tomcat")
+	}
+	implementation("org.springframework.boot:spring-boot-starter-jetty")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
