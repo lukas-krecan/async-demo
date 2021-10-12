@@ -16,3 +16,4 @@ class RequestIdWebFilter : WebFilter {
         }
     }
 }
+// See https://stackoverflow.com/questions/51738140/how-to-correctly-use-slf4j-mdc-in-spring-webflux-webfilter for how to do it correctly
