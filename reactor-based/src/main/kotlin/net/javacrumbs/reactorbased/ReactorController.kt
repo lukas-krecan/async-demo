@@ -20,8 +20,12 @@ class ReactorController {
     ): Mono<Result> {
         if (log) logger.info { "Will generate random number" }
         return getRandomNumber(delay).map {
-            if (log) logger.info { "Random number generated" }
             Result(it.number * 2)
+        }.onErrorMap { e ->
+            logger.error(e) { "Error when generating random number" }
+            e
+        }.doFinally {
+            if (log) logger.info { "Finished" }
         }
     }
 

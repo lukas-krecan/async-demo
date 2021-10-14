@@ -1,2 +1,11 @@
 GET http://localhost:8081/demo?delay=100&log=true
 Request-Id: 123456
+
+
+### Sum of random numbers (Threads)
+GET http://localhost:8081/demoSumThreads?n=100&delay=100&log=true
+Request-Id: 123456
+
+### Sum of random numbers (Async Client)
+GET http://localhost:8081/demoSum?n=100&delay=100&log=true
+Request-Id: 123456

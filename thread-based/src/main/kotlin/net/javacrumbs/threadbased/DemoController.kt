@@ -9,8 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @RestController
 class DemoController {
-    private val webClient: WebClient = WebClient.builder().baseUrl("http://localhost:8080").build()
-
     @GetMapping("/demo")
     fun demo(
         @RequestParam(defaultValue = "100") delay: Long,
@@ -19,11 +17,12 @@ class DemoController {
         if (log) logger.info { "Will generate random number" }
         try {
             val randomNumber = getRandomNumber(delay)
-            if (log) logger.info { "Random number generated" }
             return Result(randomNumber.number)
         } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
             throw e
+        } finally {
+            if (log) logger.info { "Finished" }
         }
     }
 

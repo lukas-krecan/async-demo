@@ -10,8 +10,6 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @RestController
 class CoroutineController {
-    private val webClient: WebClient = WebClient.builder().baseUrl("http://localhost:8080").build()
-
     @GetMapping("/demoCoroutines")
     suspend fun demo(
         @RequestParam(defaultValue = "100") delay: Long,

@@ -6,3 +6,8 @@ Request-Id: 123456
 ### GET from Coroutines
 GET http://localhost:8081/demoCoroutines?delay=100&log=true
 Request-Id: 123456
+
+
+### Reactor sum
+GET http://localhost:8081/demoReactorSum?n=100&delay=100&log=true
+Request-Id: 123456
