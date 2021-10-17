@@ -9,5 +9,9 @@ Request-Id: 123456
 
 
 ### Reactor sum
-GET http://localhost:8081/demoReactorSum?n=100&delay=100&log=true
+GET http://localhost:8081/demoSumReactor?n=100&delay=100&log=true
+Request-Id: 123456
+
+### Coroutine sum
+GET http://localhost:8081/demoSumCoroutines?n=100&delay=100&log=true
 Request-Id: 123456

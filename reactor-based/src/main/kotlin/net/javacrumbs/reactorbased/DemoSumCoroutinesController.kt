@@ -1,35 +1,31 @@
-package net.javacrumbs.threadbased
+package net.javacrumbs.reactorbased
 
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.reactor.awaitSingle
 import mu.KLogging
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.concurrent.Callable
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
 
 
 @RestController
-class ParallelThreadsDemoController {
-    private val executor = Executors.newFixedThreadPool(100);
+class DemoSumCoroutinesController {
 
-    @GetMapping("/demoSumThreads")
-    fun demo(
+    @GetMapping("/demoSumCoroutines")
+    suspend fun demo(
         @RequestParam(defaultValue = "3") n: Int,
         @RequestParam(defaultValue = "100") delay: Long,
         @RequestParam(defaultValue = "false") log: Boolean
-    ): Result {
+    ): Result = coroutineScope {
         if (log) logger.info { "Will generate sum of random numbers" }
         try {
-            val futures: List<Future<RandomNumber>> = (0..n).map {
-                // This is really wasteful, do not do this.
-                executor.submit(Callable { getRandomNumber(delay) })
+            val result = (0..n).map {
+                async { getRandomNumber(delay) }
+            }.sumOf {
+                it.await().number
             }
-            val result = futures.sumOf {
-                // Blocking on get
-                it.get().number
-            }
-            return Result(result)
+            Result(result)
         } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
             throw e
@@ -38,9 +34,9 @@ class ParallelThreadsDemoController {
         }
     }
 
-    private fun getRandomNumber(delay: Long): RandomNumber {
+    private suspend fun getRandomNumber(delay: Long): RandomNumber {
         return webClient.get().uri("/random?delay={delay}", delay).retrieve().bodyToMono(RandomNumber::class.java)
-            .block()!!
+            .awaitSingle()
     }
 
     companion object : KLogging()

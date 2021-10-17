@@ -10,8 +10,8 @@ import reactor.core.scheduler.Schedulers
 
 
 @RestController
-class ReactorSumController {
-    @GetMapping("/demoReactorSum")
+class DemoSumReactorController {
+    @GetMapping("/demoSumReactor")
     fun demo(
         @RequestParam(defaultValue = "3") n: Int,
         @RequestParam(defaultValue = "100") delay: Long,
