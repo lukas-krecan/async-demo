@@ -9,3 +9,7 @@ Request-Id: 123456
 ### Sum of random numbers (Async Client)
 GET http://localhost:8081/demoSum?n=100&delay=100&log=true
 Request-Id: 123456
+
+### Sum of random numbers (Loom)
+GET http://localhost:8081/demoSumLoom?n=100&delay=100&log=true
+Request-Id: 123456
