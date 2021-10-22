@@ -16,8 +16,9 @@ class DemoController {
     ): Result {
         if (log) logger.info { "Will generate random number" }
         try {
+            // call an external service
             val randomNumber = getRandomNumber(delay)
-            return Result(randomNumber.number)
+            return Result(randomNumber.number * 2)
         } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
             throw e
@@ -27,7 +28,8 @@ class DemoController {
     }
 
     private fun getRandomNumber(delay: Long): RandomNumber {
-        return webClient.get().uri("/random?delay={delay}", delay).retrieve().bodyToMono(RandomNumber::class.java).block()!!
+        return webClient.get().uri("/random?delay={delay}", delay)
+            .retrieve().bodyToMono(RandomNumber::class.java).block()!!
     }
 
     companion object: KLogging()

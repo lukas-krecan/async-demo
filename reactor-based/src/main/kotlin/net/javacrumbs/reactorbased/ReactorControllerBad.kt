@@ -9,22 +9,24 @@ import reactor.core.publisher.Mono
 
 
 @RestController
-class ReactorController {
+class ReactorControllerBad {
     private val webClient: WebClient = WebClient.builder().baseUrl("http://localhost:8080").build()
 
 
-    @GetMapping("/demoReactor")
+    @GetMapping("/demoReactorBad")
     fun demo(
         @RequestParam(defaultValue = "100") delay: Long,
         @RequestParam(defaultValue = "false") log: Boolean
     ): Mono<Result> {
         if (log) logger.info { "Will generate random number" }
-        return getRandomNumber(delay).map {
-            Result(it.number * 2)
-        }.onErrorMap { e ->
+        try {
+            return getRandomNumber(delay).map {
+                Result(it.number * 2)
+            }
+        } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
-            e
-        }.doFinally {
+            throw e
+        } finally {
             if (log) logger.info { "Finished" }
         }
     }

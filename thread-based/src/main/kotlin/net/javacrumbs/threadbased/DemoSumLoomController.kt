@@ -21,7 +21,7 @@ class DemoSumLoomController {
         try {
             return Executors.newVirtualThreadExecutor().use { executor ->
                 val result = (0..n).map {
-                    executor.submit(Callable { getRandomNumber(delay) })
+                    executor.submit(Callable { getRandomNumber(delay, log) })
                 }.sumOf {
                     // Blocking on get
                     it.get().number
@@ -36,7 +36,8 @@ class DemoSumLoomController {
         }
     }
 
-    private fun getRandomNumber(delay: Long): RandomNumber {
+    private fun getRandomNumber(delay: Long, log: Boolean): RandomNumber {
+        if (log) logger.info { "Generating random number" }
         return webClient.get().uri("/random?delay={delay}", delay).retrieve().bodyToMono(RandomNumber::class.java)
             .block()!!
     }

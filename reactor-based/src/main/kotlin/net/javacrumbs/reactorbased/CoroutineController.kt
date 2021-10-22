@@ -19,7 +19,7 @@ class CoroutineController {
         try {
             val randomNumber = getRandomNumber(delay)
             if (log) logger.info { "Random number generated" }
-            return Result(randomNumber.number)
+            return Result(randomNumber.number * 2)
         } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
             throw e
@@ -27,7 +27,8 @@ class CoroutineController {
     }
 
     private suspend fun getRandomNumber(delay: Long): RandomNumber {
-        return webClient.get().uri("/random?delay={delay}", delay).retrieve().bodyToMono(RandomNumber::class.java).awaitSingle()
+        return webClient.get().uri("/random?delay={delay}", delay)
+            .retrieve().bodyToMono(RandomNumber::class.java).awaitSingle()
     }
 
     companion object: KLogging()
