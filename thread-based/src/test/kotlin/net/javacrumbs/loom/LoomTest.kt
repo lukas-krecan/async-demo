@@ -16,10 +16,10 @@ class LoomTest {
         // `use` is Kotlin way to write try with resources
         // `close` method on the executor waits for all submitted tasks
         Executors.newVirtualThreadExecutor().use { executor ->
-            repeat(1_000_000) {
+            repeat(10_000) {
                 executor.submit {
                     //logger.info { "Hello from a virtual thread" }
-                    Thread.sleep(100)
+                    Thread.sleep(1000)
                     adder.increment()
                 }
             }

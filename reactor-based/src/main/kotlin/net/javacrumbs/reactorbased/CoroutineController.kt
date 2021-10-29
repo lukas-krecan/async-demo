@@ -18,11 +18,12 @@ class CoroutineController {
         if (log) logger.info { "Will generate random number" }
         try {
             val randomNumber = getRandomNumber(delay)
-            if (log) logger.info { "Random number generated" }
             return Result(randomNumber.number * 2)
         } catch (e: Exception) {
             logger.error(e) { "Error when generating random number" }
             throw e
+        } finally {
+            if (log) logger.info { "Finished" }
         }
     }
 
