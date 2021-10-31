@@ -12,20 +12,19 @@ class LoomTest {
         val adder = LongAdder()
         logger.info { "Started" }
 
-        //Create a new virtual thread executor,
-        // `use` is Kotlin way to write try with resources
-        // `close` method on the executor waits for all submitted tasks
-        Executors.newVirtualThreadExecutor().use { executor ->
-            repeat(10_000) {
-                executor.submit {
-                    //logger.info { "Hello from a virtual thread" }
-                    Thread.sleep(1000)
-                    adder.increment()
-                }
+        val executor = Executors.newThreadPerTaskExecutor(Thread.ofPlatform().factory())
+        repeat(1_000) {
+            executor.submit {
+                Thread.sleep(1000)
+                adder.increment()
             }
         }
+        // `close` method on the executor waits for all submitted tasks
+        // Should be used in `use` (try with resources)
+        executor.close()
+
         logger.info { "The result is ${adder.sum()}" }
     }
 
-    companion object: KLogging()
+    companion object : KLogging()
 }
