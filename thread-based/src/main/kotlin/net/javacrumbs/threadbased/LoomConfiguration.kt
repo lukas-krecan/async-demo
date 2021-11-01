@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.concurrent.Executors
 
-//@Configuration
+@Configuration
 class LoomConfiguration {
     @Bean
     fun jettyCustomizer(): WebServerFactoryCustomizer<ConfigurableJettyWebServerFactory> {
-        return WebServerFactoryCustomizer<ConfigurableJettyWebServerFactory> { factory -> factory.setThreadPool(LoomThreadPool()) }
+        return WebServerFactoryCustomizer<ConfigurableJettyWebServerFactory> {
+                factory -> factory.setThreadPool(LoomThreadPool())
+        }
     }
 
     private class LoomThreadPool: ThreadPool {
