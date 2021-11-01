@@ -12,10 +12,10 @@ class LoomTest {
         val adder = LongAdder()
         logger.info { "Started" }
 
-        val executor = Executors.newThreadPerTaskExecutor(Thread.ofPlatform().factory())
+        val executor = Executors.newThreadPerTaskExecutor(::Thread)
         repeat(1_000) {
             executor.submit {
-                Thread.sleep(1000)
+                Thread.sleep(1_000)
                 adder.increment()
             }
         }
