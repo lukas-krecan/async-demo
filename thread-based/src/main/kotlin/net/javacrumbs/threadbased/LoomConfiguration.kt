@@ -17,7 +17,7 @@ class LoomConfiguration {
     }
 
     private class LoomThreadPool: ThreadPool {
-        private val executor = Executors.newVirtualThreadExecutor()
+        private val executor = Executors.newVirtualThreadPerTaskExecutor()
         override fun execute(command: Runnable) {
             executor.execute(command)
         }

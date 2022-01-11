@@ -19,7 +19,7 @@ class DemoSumLoomController {
     ): Result {
         if (log) logger.info { "Will generate sum of random numbers" }
         try {
-            return Executors.newVirtualThreadExecutor().use { executor ->
+            return Executors.newVirtualThreadPerTaskExecutor().use { executor ->
                 val result = (0..n).map {
                     executor.submit(Callable { getRandomNumber(delay, log) })
                 }.sumOf {
