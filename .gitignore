@@ -1,2 +1,4 @@
 out.html
 result.bin
+target/
+.idea/
