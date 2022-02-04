@@ -1,4 +1,4 @@
-GET http://localhost:8081/demo?delay=100&log=true
+GET http://localhost:8081/demo?delay=-100&log=true
 Request-Id: 123456
 
 
@@ -12,4 +12,8 @@ Request-Id: 123456
 
 ### Sum of random numbers (Loom)
 GET http://localhost:8081/demoSumLoom?n=100&delay=100&log=true
+Request-Id: 123456
+
+### Reactor on top of Spring MVC
+GET http://localhost:8081/demoReactor?delay=-100&log=true
 Request-Id: 123456
